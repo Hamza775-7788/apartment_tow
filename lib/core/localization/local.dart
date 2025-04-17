@@ -7,6 +7,7 @@ class Mylocal extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
     "ar": {
+      "يجب اضافة رقم الهاتف": "يجب اضافة رقم الهاتف",
       "دليل مجموعات الاصناف": "دليل مجموعات الاصناف",
       "اضافة": "اضافة",
       "حذف": "حذف",
@@ -367,8 +368,23 @@ class Mylocal extends Translations {
       "البحث": "البحث",
       "من نحن": "من نحن",
       messageAr: messageAr,
+      "يقوم بعرض الشقق للبيع والتعامل مع طلبات التأجير":
+          "يقوم بعرض الشقق للبيع والتعامل مع طلبات التأجير",
+      "مؤجر": "مؤجر",
+      "يقوم بتصفح الشقق المعروضة للأيجار ورفع طلبات تأجير ":
+          "يقوم بتصفح الشقق المعروضة للأيجار ورفع طلبات تأجير ",
+      "عميل": "عميل",
+      "حدد ماهو حسابك ؟": "حدد ماهو حسابك ؟",
     },
     "en": {
+      "حدد ماهو حسابك ؟": "Specify what your account is?",
+      "عميل": "client",
+      "يقوم بتصفح الشقق المعروضة للأيجار ورفع طلبات تأجير ":
+          "Browse apartments for rent and submit rental applications.",
+      "مؤجر": "Rented",
+      "يقوم بعرض الشقق للبيع والتعامل مع طلبات التأجير":
+          "List apartments for sale and handle rental requests.",
+      "يجب اضافة رقم الهاتف": "Phone number must be added",
       "شقق": "Apartment",
       "يمكنك تأجير شقق من هذا الخيار":
           "You can rent apartments from this option.",

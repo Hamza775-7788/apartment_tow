@@ -7,6 +7,8 @@ import 'package:apartment_tow/featuers/auth/domain/entity/user_entity.dart';
 import 'package:apartment_tow/featuers/auth/presntaion/controller/Auth_controller.dart';
 
 class RegesterViewModel {
+  final int userType;
+  RegesterViewModel({required this.userType});
   final SignInAndSignUpControllerImpl _controller = Get.find();
   String title = "انشاء حساب جديد".tr;
   String body = "قم بملء جيمع الحقول التالية لانشاء الحساب".tr;
@@ -29,12 +31,15 @@ class RegesterViewModel {
   late TextEditingController passwordController;
   late TextEditingController confermPasswordController =
       TextEditingController();
+
   void sendCode() async {
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
         confermPasswordController.text.isEmpty) {
       Get.dialog(ErorrDilaog(message: "يجب ملء الحقول كامل".tr));
+    } else if (userType == 1 && phoneController.text.isEmpty) {
+      Get.dialog(ErorrDilaog(message: "يجب اضافة رقم الهاتف".tr));
     } else if (passwordController.text.length < 6) {
       Get.dialog(ErorrDilaog(message: "كلمة المرور عير كافيه".tr));
     } else if (passwordController.text != confermPasswordController.text) {
@@ -47,14 +52,15 @@ class RegesterViewModel {
           id: 0,
           name: nameController.text,
           email: emailController.text,
-          type: 0,
+          type: userType,
           phone: phoneController.text,
         );
 
         _controller.sendCode(
-            user: user,
-            email: emailController.text,
-            passowrd: passwordController.text);
+          user: user,
+          email: emailController.text,
+          passowrd: passwordController.text,
+        );
       } else {
         Get.dialog(ErorrDilaog(message: "يجب ادخال بريد اكتروني صحيح".tr));
       }

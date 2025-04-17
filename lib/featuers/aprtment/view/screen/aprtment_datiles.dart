@@ -8,7 +8,6 @@ import 'package:apartment_tow/core/theme/app_theme.dart';
 import 'package:apartment_tow/core/theme/text_styles.dart';
 import 'package:apartment_tow/featuers/aprtment/model/aprtment_Model.dart';
 import 'package:apartment_tow/featuers/aprtment/view/widget/apartment_image_wiget.dart';
-import 'package:apartment_tow/featuers/aprtment/view/widget/image_indector.dart';
 import 'package:apartment_tow/featuers/aprtment/viewModel/apartment_ditales.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

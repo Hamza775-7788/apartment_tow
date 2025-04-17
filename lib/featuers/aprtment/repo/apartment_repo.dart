@@ -61,7 +61,6 @@ class ApartmentRepoistoryImpl implements ApartmentRepoistory {
         final userInfo = await localDataSource.getCachedUser();
         apartment.userName = userInfo.id.toString();
         final body = apartment.toJson();
-        print("hi from Repository");
         final response = await getConnect.post(
           ApartMentApiLink.add,
           jsonEncode(body),
@@ -91,7 +90,7 @@ class ApartmentRepoistoryImpl implements ApartmentRepoistory {
         final body = {"id": id};
         final response = await getConnect.post(
           ApartMentApiLink.delete,
-          jsonEncode(body),
+          jsonEncode({"id": id}),
         );
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);

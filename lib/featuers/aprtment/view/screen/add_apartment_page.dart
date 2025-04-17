@@ -172,7 +172,9 @@ class _AddApartmentPageState extends State<AddApartmentPage> {
                 SliverToBoxAdapter(
                   child: MyGenralButton(
                     name: viewModel.addButtonLabel,
-                    onPressed: viewModel.onAdd,
+                    onPressed: () {
+                      viewModel.onAdd();
+                    },
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 16)),

@@ -126,7 +126,7 @@ class AddApartmentViewModel {
         userName: '',
         userEmail: '',
       );
-      print("hi from ViewMOdel");
+
       await _controllerImpl.addApartment(apartment: apartment);
     }
   }

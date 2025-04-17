@@ -101,6 +101,8 @@ flutter:
         - asset: asset/fonts/Somar-RegularItalic.otf
           style: italic
         - asset: asset/fonts/Somar-SemiBold.otf
+  
+  
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

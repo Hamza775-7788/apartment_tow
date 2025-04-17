@@ -116,7 +116,7 @@ class MyPinTextFiled extends StatelessWidget {
         ),
         height: getTextSize(fontSize: 60),
         decoration: BoxDecoration(
-          color: Get.theme.colorScheme.secondary,
+          color: Get.theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(3),
         ),
       ),

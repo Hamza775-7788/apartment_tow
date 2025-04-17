@@ -1,4 +1,5 @@
 import 'package:apartment_tow/core/model/category_or_unit_entiry.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:apartment_tow/core/functions/get_text_size_functions.dart';
@@ -166,7 +167,7 @@ class _MyDropDownListWithValueState extends State<MyDropDownListWithValue> {
       decoration: InputDecoration(
         constraints: BoxConstraints(maxHeight: getTextSize(fontSize: 40)),
         filled: true,
-        fillColor: Get.theme.colorScheme.secondary,
+        fillColor: Get.theme.colorScheme.surface,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 10,
@@ -193,7 +194,7 @@ class _MyDropDownListWithValueState extends State<MyDropDownListWithValue> {
 InputDecoration inputDecoration = InputDecoration(
   constraints: BoxConstraints(maxHeight: getTextSize(fontSize: 46)),
   filled: true,
-  fillColor: Get.theme.colorScheme.secondary,
+  fillColor: Get.theme.colorScheme.surface,
   contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
   enabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(6),

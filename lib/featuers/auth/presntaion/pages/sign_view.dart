@@ -135,29 +135,7 @@ class _SignViewPageState extends State<SignViewPage> {
                   ),
                 ),
               ),
-              const SizedBox(width: 16),
-              Flexible(
-                child: FittedBox(
-                  child: Text(
-                    _viewModel.or,
-                    style: TextStyle(fontSize: getTextSize(fontSize: 20)),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Flexible(
-                child: FittedBox(
-                  child: TextButton(
-                    onPressed: () {
-                      _viewModel.loginVeister();
-                    },
-                    child: Text(
-                      _viewModel.vesiterLogin,
-                      style: TextStyle(fontSize: getTextSize(fontSize: 20)),
-                    ),
-                  ),
-                ),
-              ),
+             
             ],
           ),
         ],

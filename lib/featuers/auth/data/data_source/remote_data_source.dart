@@ -17,14 +17,19 @@ abstract class AuthRemoteDataSource extends GetConnect {
   Future<Unit> verifyCode({required String code, required String email});
   Future<UserModel> signUp({required UserModel userModel});
   Future<Unit> forgetPasswordsendCode({required String email});
-  Future<UserModel> foregetPasswordRestPassword(
-      {required String email, required String newPassword});
-  Future<Unit> foregetPasswordVerifyCode(
-      {required String code, required String email});
-  Future<Unit> restPassword(
-      {required int id,
-      required String oldPassword,
-      required String newPasswored});
+  Future<UserModel> foregetPasswordRestPassword({
+    required String email,
+    required String newPassword,
+  });
+  Future<Unit> foregetPasswordVerifyCode({
+    required String code,
+    required String email,
+  });
+  Future<Unit> restPassword({
+    required int id,
+    required String oldPassword,
+    required String newPasswored,
+  });
   Future<UserModel> deleteUserProfie({required int id});
   Future<UserModel> setProfile({required int id, required File image});
   Future<UserModel> updateUser({required UserModel userModle, File? image});
@@ -32,14 +37,12 @@ abstract class AuthRemoteDataSource extends GetConnect {
 
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   @override
-  Future<UserModel> signIn(
-      {required String email, required String passowrd}) async {
-    final body = {
-      "email": email,
-      "password": passowrd,
-    };
+  Future<UserModel> signIn({
+    required String email,
+    required String passowrd,
+  }) async {
+    final body = {"email": email, "password": passowrd};
     final response = await post(AuthLinkAPI.signIn, jsonEncode(body));
-    print(response.body);
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       if (jsonData['status'] == "success") {
@@ -63,9 +66,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
   @override
   Future<UserModel> getUser({required int id}) async {
-    final body = {
-      "id": id,
-    };
+    final body = {"id": id};
     final response = await post(AuthLinkAPI.getUser, jsonEncode(body));
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
@@ -81,13 +82,13 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<Unit> sendCode(
-      {required String email, required String passowrd}) async {
-    final body = {
-      "email": email,
-      "password": passowrd,
-    };
+  Future<Unit> sendCode({
+    required String email,
+    required String passowrd,
+  }) async {
+    final body = {"email": email, "password": passowrd};
     final response = await post(AuthLinkAPI.sendCode, jsonEncode(body));
+
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       if (jsonData['status'] == "success") {
@@ -106,10 +107,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
   @override
   Future<Unit> verifyCode({required String code, required String email}) async {
-    final body = {
-      "code": code,
-      "email": email,
-    };
+    final body = {"code": code, "email": email};
     final response = await post(AuthLinkAPI.verifiyCode, jsonEncode(body));
 
     if (response.statusCode == 200) {
@@ -131,10 +129,11 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<Unit> restPassword(
-      {required int id,
-      required String oldPassword,
-      required String newPasswored}) async {
+  Future<Unit> restPassword({
+    required int id,
+    required String oldPassword,
+    required String newPasswored,
+  }) async {
     final body = {
       "userID": id,
       "oldPassword": oldPassword,
@@ -162,6 +161,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     final body = userModel.toJson();
     final response = await post(AuthLinkAPI.signUp, jsonEncode(body));
 
+    print(jsonEncode(body));
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       if (jsonData['status'] == "success") {
@@ -176,15 +176,13 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> foregetPasswordRestPassword(
-      {required String email, required String newPassword}) async {
-    final body = {
-      "email": email,
-      "password": newPassword,
-    };
+  Future<UserModel> foregetPasswordRestPassword({
+    required String email,
+    required String newPassword,
+  }) async {
+    final body = {"email": email, "password": newPassword};
 
     final response = await post(AuthLinkAPI.fPrestPassword, jsonEncode(body));
-
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
@@ -205,9 +203,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
   @override
   Future<Unit> forgetPasswordsendCode({required String email}) async {
-    final body = {
-      "email": email,
-    };
+    final body = {"email": email};
     final response = await post(AuthLinkAPI.fPsendCode, jsonEncode(body));
 
     if (response.statusCode == 200) {
@@ -227,12 +223,11 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<Unit> foregetPasswordVerifyCode(
-      {required String code, required String email}) async {
-    final body = {
-      "code": code,
-      "email": email,
-    };
+  Future<Unit> foregetPasswordVerifyCode({
+    required String code,
+    required String email,
+  }) async {
+    final body = {"code": code, "email": email};
     final response = await post(AuthLinkAPI.fPverifyCode, jsonEncode(body));
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
@@ -257,11 +252,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     File newImage = resizeImage(image);
     String imageName = path.basename(newImage.path);
     String _image = base64Encode(newImage.readAsBytesSync());
-    final body = {
-      "id": id,
-      "name": imageName,
-      "image": _image,
-    };
+    final body = {"id": id, "name": imageName, "image": _image};
     final response = await post(AuthLinkAPI.setProfile, jsonEncode(body));
     if (response.statusCode == 200) {
       final jsonDate = jsonDecode(response.body);
@@ -277,8 +268,10 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> updateUser(
-      {required UserModel userModle, File? image}) async {
+  Future<UserModel> updateUser({
+    required UserModel userModle,
+    File? image,
+  }) async {
     Map body = userModle.toJson();
     body['image'] = null;
     if (image != null) {
@@ -293,10 +286,11 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         );
       } else {
         url = await UploaidFilesImpl().uploadFile(
-            foleder: "profiles",
-            file: image,
-            url: uploadFileLink,
-            data: {"folderName": "profiles"});
+          foleder: "profiles",
+          file: image,
+          url: uploadFileLink,
+          data: {"folderName": "profiles"},
+        );
       }
       body['image'] = url;
     }

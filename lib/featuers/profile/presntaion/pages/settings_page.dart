@@ -64,27 +64,29 @@ class _SettingViewState extends State<SettingView> {
                             endIndent: 15,
                             indent: 15,
                           ),
-                          ListTile(
-                            onTap: () {
-                              Get.to(() => const ApartmentPage());
-                            },
-                            leading: Image.asset(
-                              AppIcons.logo,
-                              color: Get.theme.colorScheme.primary,
-                              width: 30,
+                          if (controller.userInfo?.type == 1)
+                            ListTile(
+                              onTap: () {
+                                Get.to(() => const ApartmentPage());
+                              },
+                              leading: Image.asset(
+                                AppIcons.logo,
+                                color: Get.theme.colorScheme.primary,
+                                width: 30,
+                              ),
+                              title: Text(viewModel.apartmentLable),
+                              subtitle: Text(viewModel.apartmentSupTitle),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 20,
+                              ),
                             ),
-                            title: Text(viewModel.apartmentLable),
-                            subtitle: Text(viewModel.apartmentSupTitle),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 20,
+                          if (controller.userInfo?.type == 1)
+                            const Divider(
+                              thickness: 0.2,
+                              endIndent: 15,
+                              indent: 15,
                             ),
-                          ),
-                          const Divider(
-                            thickness: 0.2,
-                            endIndent: 15,
-                            indent: 15,
-                          ),
                           ListTile(
                             onTap: () {
                               Get.bottomSheet(LocalizationViewPage());

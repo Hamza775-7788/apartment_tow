@@ -14,18 +14,20 @@ class AuthReositoryImpl extends AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  AuthReositoryImpl(
-      {required this.localDataSource,
-      required this.remoteDataSource,
-      required this.networkInfo});
+  AuthReositoryImpl({
+    required this.localDataSource,
+    required this.remoteDataSource,
+    required this.networkInfo,
+  });
 
   @override
   Future<Either<Failure, Unit>> deleteProfile() async {
     if (await networkInfo.isConnected) {
       try {
         final userInfo = await localDataSource.getCachedUser();
-        final response =
-            await remoteDataSource.deleteUserProfie(id: userInfo.id);
+        final response = await remoteDataSource.deleteUserProfie(
+          id: userInfo.id,
+        );
         await localDataSource.cachedUser(response);
         return const Right(unit);
       } on ServerException {
@@ -59,12 +61,16 @@ class AuthReositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> foregetPasswordRestPassword(
-      {required String email, required String newPassword}) async {
+  Future<Either<Failure, Unit>> foregetPasswordRestPassword({
+    required String email,
+    required String newPassword,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.foregetPasswordRestPassword(
-            email: email, newPassword: newPassword);
+          email: email,
+          newPassword: newPassword,
+        );
         await localDataSource.cachedUser(response);
         return const Right(unit);
       } on ServerException {
@@ -98,8 +104,9 @@ class AuthReositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> forgetPasswordSendCode(
-      {required String email}) async {
+  Future<Either<Failure, Unit>> forgetPasswordSendCode({
+    required String email,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.forgetPasswordsendCode(email: email);
@@ -135,12 +142,16 @@ class AuthReositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> forgetPasswordverifyCode(
-      {required String code, required String email}) async {
+  Future<Either<Failure, Unit>> forgetPasswordverifyCode({
+    required String code,
+    required String email,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.foregetPasswordVerifyCode(
-            code: code, email: email);
+          code: code,
+          email: email,
+        );
 
         return const Right(unit);
       } on ServerException {
@@ -217,15 +228,18 @@ class AuthReositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> restPassword(
-      {required String oldPassword, required String newPasswored}) async {
+  Future<Either<Failure, Unit>> restPassword({
+    required String oldPassword,
+    required String newPasswored,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         final userInfo = await localDataSource.getCachedUser();
         await remoteDataSource.restPassword(
-            id: userInfo.id,
-            oldPassword: oldPassword,
-            newPasswored: newPasswored);
+          id: userInfo.id,
+          oldPassword: oldPassword,
+          newPasswored: newPasswored,
+        );
         return const Right(unit);
       } on ServerException {
         return Left(ServerFailure());
@@ -258,8 +272,10 @@ class AuthReositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> sendCode(
-      {required String email, required String passowrd}) async {
+  Future<Either<Failure, Unit>> sendCode({
+    required String email,
+    required String passowrd,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.sendCode(email: email, passowrd: passowrd);
@@ -300,8 +316,10 @@ class AuthReositoryImpl extends AuthRepository {
     if (await networkInfo.isConnected) {
       try {
         final userInfo = await localDataSource.getCachedUser();
-        final response =
-            await remoteDataSource.setProfile(id: userInfo.id, image: image);
+        final response = await remoteDataSource.setProfile(
+          id: userInfo.id,
+          image: image,
+        );
         await localDataSource.cachedUser(response);
         return const Right(unit);
       } on ServerException {
@@ -335,12 +353,16 @@ class AuthReositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> signIn(
-      {required String email, required String passowrd}) async {
+  Future<Either<Failure, Unit>> signIn({
+    required String email,
+    required String passowrd,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
-        final response =
-            await remoteDataSource.signIn(email: email, passowrd: passowrd);
+        final response = await remoteDataSource.signIn(
+          email: email,
+          passowrd: passowrd,
+        );
         await localDataSource.cachedUser(response);
         return const Right(unit);
       } on ServerException {
@@ -378,7 +400,13 @@ class AuthReositoryImpl extends AuthRepository {
     if (await networkInfo.isConnected) {
       try {
         UserModel userMode = UserModel(
-            id: user.id, name: user.name, type: user.type, email: user.email);
+          phone: user.phone,
+          profile: user.profile,
+          id: user.id,
+          name: user.name,
+          type: user.type,
+          email: user.email,
+        );
         final response = await remoteDataSource.signUp(userModel: userMode);
         await localDataSource.cachedUser(response);
         return const Right(unit);
@@ -413,20 +441,25 @@ class AuthReositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> updateUser(
-      {required User user, File? image}) async {
+  Future<Either<Failure, Unit>> updateUser({
+    required User user,
+    File? image,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         final userInfo = await localDataSource.getCachedUser();
         UserModel userMode = UserModel(
-            phone: user.phone,
-            id: userInfo.id,
-            profile: userInfo.profile,
-            name: user.name,
-            type: user.type,
-            email: user.email);
+          phone: user.phone,
+          id: userInfo.id,
+          profile: userInfo.profile,
+          name: user.name,
+          type: user.type,
+          email: user.email,
+        );
         final response = await remoteDataSource.updateUser(
-            image: image, userModle: userMode);
+          image: image,
+          userModle: userMode,
+        );
         await localDataSource.cachedUser(response);
         return const Right(unit);
       } on ServerException {
@@ -460,8 +493,10 @@ class AuthReositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> verifyCode(
-      {required String code, required String email}) async {
+  Future<Either<Failure, Unit>> verifyCode({
+    required String code,
+    required String email,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.verifyCode(code: code, email: email);

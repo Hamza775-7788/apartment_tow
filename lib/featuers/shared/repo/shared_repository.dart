@@ -47,6 +47,7 @@ class SharedRepositoryImpl implements SharedRepository {
   Future<Either<Failure, List<EilmentModel>>> getGuarantees() async {
     if (await networkInfo.isConnected) {
       final response = await getConnect.get(SharedLinkAPI.viewGuarantees);
+
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         if (jsonData['status']) {

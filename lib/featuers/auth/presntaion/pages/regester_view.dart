@@ -8,17 +8,20 @@ import 'package:apartment_tow/core/shared/my_text_filed.dart';
 import 'package:apartment_tow/featuers/auth/presntaion/view_model/regester_view_model.dart';
 
 class RegesterView extends StatefulWidget {
-  const RegesterView({super.key});
+  final int userType;
+  const RegesterView({required this.userType, super.key});
 
   @override
   State<RegesterView> createState() => _RegesterViewState();
 }
 
 class _RegesterViewState extends State<RegesterView> {
-  RegesterViewModel _viewModel = RegesterViewModel();
+  late RegesterViewModel _viewModel;
+
   @override
   void initState() {
     super.initState();
+    _viewModel = RegesterViewModel(userType: widget.userType);
     _viewModel.emailController = TextEditingController();
     _viewModel.passwordController = TextEditingController();
     _viewModel.nameController = TextEditingController();
@@ -39,9 +42,7 @@ class _RegesterViewState extends State<RegesterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Get.theme.colorScheme.background,
-      ),
+      appBar: AppBar(backgroundColor: Get.theme.colorScheme.background),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
@@ -55,15 +56,11 @@ class _RegesterViewState extends State<RegesterView> {
           ),
           Text(
             _viewModel.body,
-            style: TextStyle(
-              fontSize: getTextSize(fontSize: 23),
-            ),
+            style: TextStyle(fontSize: getTextSize(fontSize: 23)),
           ),
           Text(
             _viewModel.nameLable,
-            style: TextStyle(
-              fontSize: getTextSize(fontSize: 20),
-            ),
+            style: TextStyle(fontSize: getTextSize(fontSize: 20)),
           ),
           const SizedBox(height: 5),
           MyCustomRequiredTextFiled(
@@ -73,9 +70,7 @@ class _RegesterViewState extends State<RegesterView> {
           const SizedBox(height: 16),
           Text(
             _viewModel.emailLabal,
-            style: TextStyle(
-              fontSize: getTextSize(fontSize: 20),
-            ),
+            style: TextStyle(fontSize: getTextSize(fontSize: 20)),
           ),
           const SizedBox(height: 5),
           MyCustomRequiredTextFiled(
@@ -89,22 +84,18 @@ class _RegesterViewState extends State<RegesterView> {
           const SizedBox(height: 16),
           Text(
             _viewModel.phoneNumperLable,
-            style: TextStyle(
-              fontSize: getTextSize(fontSize: 20),
-            ),
+            style: TextStyle(fontSize: getTextSize(fontSize: 20)),
           ),
           const SizedBox(height: 5),
           MyCustomRequiredTextFiled(
             isNumber: true,
-            hint: _viewModel.optinal,
+            hint: widget.userType == 0 ? _viewModel.optinal : "777 777 777",
             controller: _viewModel.phoneController,
           ),
           const SizedBox(height: 16),
           Text(
             _viewModel.passwordLabal,
-            style: TextStyle(
-              fontSize: getTextSize(fontSize: 20),
-            ),
+            style: TextStyle(fontSize: getTextSize(fontSize: 20)),
           ),
           const SizedBox(height: 5),
           MyCustomRequiredTextFiled(
@@ -115,9 +106,7 @@ class _RegesterViewState extends State<RegesterView> {
           const SizedBox(height: 16),
           Text(
             _viewModel.confermPasswordLable,
-            style: TextStyle(
-              fontSize: getTextSize(fontSize: 20),
-            ),
+            style: TextStyle(fontSize: getTextSize(fontSize: 20)),
           ),
           const SizedBox(height: 5),
           MyCustomRequiredTextFiled(
