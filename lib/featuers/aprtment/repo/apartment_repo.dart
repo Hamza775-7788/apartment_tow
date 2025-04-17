@@ -90,7 +90,7 @@ class ApartmentRepoistoryImpl implements ApartmentRepoistory {
         final body = {"id": id};
         final response = await getConnect.post(
           ApartMentApiLink.delete,
-          jsonEncode({"id": id}),
+          jsonEncode(body),
         );
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);
