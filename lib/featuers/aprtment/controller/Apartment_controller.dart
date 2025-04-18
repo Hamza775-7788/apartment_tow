@@ -57,7 +57,6 @@ class ApartmentControllerImpl extends ApartmentController {
 
   @override
   Future<void> addApartment({required Apartment apartment}) async {
- 
     try {
       showLoding();
       final response = await _apartmentRepoistory.addApartment(
@@ -135,7 +134,10 @@ class ApartmentControllerImpl extends ApartmentController {
 
       response.fold(
         (falure) {
-          handleError(falure);
+          if (falure is EmptyRemotDataFailure) {
+            apartment = [];
+            update();
+          }
         },
         (r) {
           apartment = r;
