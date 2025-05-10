@@ -154,6 +154,8 @@ class ApartmentRepoistoryImpl implements ApartmentRepoistory {
       if (await networkInfo.isConnected) {
         String url = "${ApartMentApiLink.shearch}?search=$qury";
         final response = await getConnect.get(url);
+        print(response.statusCode);
+        print(response.body);
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);
           if (jsonData['status']) {

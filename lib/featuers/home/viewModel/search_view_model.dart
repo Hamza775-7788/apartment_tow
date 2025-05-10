@@ -12,9 +12,10 @@ class SearchViewModel {
     getIt!<ApartmentControllerImpl>(),
   );
   List<Apartment> get apartment {
-    return _controllerImpl.apartment;
+    return _controllerImpl.searchApartment;
   }
-late TextEditingController controller;
+
+  late TextEditingController controller;
   onChange(String qury) {
     _controllerImpl.search(qury: qury, coloumn: "title");
   }

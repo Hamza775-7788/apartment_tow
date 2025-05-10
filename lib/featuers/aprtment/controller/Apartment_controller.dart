@@ -41,6 +41,7 @@ class ApartmentControllerImpl extends ApartmentController {
   final SharedRepository _sharedRepository;
   final ImagePicker _imagePicker;
   List<Apartment> apartment = [];
+  List<Apartment> searchApartment = [];
   List<EilmentModel> apartmentType = [];
   List<EilmentModel> jopTypes = [];
   List<EilmentModel> guaranteesType = [];
@@ -156,11 +157,20 @@ class ApartmentControllerImpl extends ApartmentController {
         qury: qury,
         coloumn: coloumn,
       );
-      response.fold((falure) {}, (r) {
-        apartment = r;
-        update();
-      });
-    } catch (e) {}
+      response.fold(
+        (falure) {
+          searchApartment = [];
+          update();
+        },
+        (r) {
+          searchApartment = r;
+          update();
+        },
+      );
+    } catch (e) {
+      searchApartment = [];
+      update();
+    }
   }
 
   @override
