@@ -16,7 +16,7 @@ class MainViewModel {
   ];
   String homeLabel = "الرئيسية".tr;
   String hartLable = "المفضلة".tr;
-  String categorylabel = "بحث".tr;
+  String categorylabel = "البحث".tr;
   String offersLabel = "عنا".tr;
-  String more = "العدادات".tr;
+  String more = "الاعدادات".tr;
 }
